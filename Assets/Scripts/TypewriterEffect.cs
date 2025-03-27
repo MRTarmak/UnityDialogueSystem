@@ -48,7 +48,7 @@ public class TypewriterEffect : MonoBehaviour
     private IEnumerator TypeText()
     {
         _textField.text = "";
-        foreach (char c in _currentText.ToCharArray())
+        foreach (var c in _currentText.ToCharArray())
         {
             _textField.text += c;
             PlayTypingSound();
