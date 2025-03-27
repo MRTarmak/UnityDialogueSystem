@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Image))]
 public class FadeImageAnimator : MonoBehaviour
 {
-    private float fadeTime = 0.1f;
+    private const float FadeTime = 0.1f;
     
     private Image _image;
     private Coroutine _fadeCoroutine;
@@ -23,6 +23,15 @@ public class FadeImageAnimator : MonoBehaviour
         
         _fadeCoroutine = StartCoroutine(FadeSequence(newSprite));
     }
+    
+    public void SkipFade()
+    {
+        if (_fadeCoroutine != null)
+        {
+            StopCoroutine(_fadeCoroutine);
+            _image.color = new Color(1, 1, 1, 1);
+        }
+    }
 
     private IEnumerator FadeSequence(Sprite newSprite)
     {
@@ -30,7 +39,7 @@ public class FadeImageAnimator : MonoBehaviour
         {
             while (_image.color.a > 0)
             {
-                _image.color = new Color(1, 1, 1, _image.color.a - Time.deltaTime / fadeTime);
+                _image.color = new Color(1, 1, 1, _image.color.a - Time.deltaTime / FadeTime);
                 yield return null;
             }
         }
@@ -42,7 +51,7 @@ public class FadeImageAnimator : MonoBehaviour
             gameObject.SetActive(true);
             while (_image.color.a < 1)
             {
-                _image.color = new Color(1, 1, 1, _image.color.a + Time.deltaTime / fadeTime);
+                _image.color = new Color(1, 1, 1, _image.color.a + Time.deltaTime / FadeTime);
                 yield return null;
             }
         }

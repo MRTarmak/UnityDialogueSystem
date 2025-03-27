@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -23,6 +24,7 @@ public class DialogueManager : MonoBehaviour
     
     private TypewriterEffect _typewriter;
     private FadeImageAnimator _imageAnimator;
+    private List<ButtonAppearAnimator> _activeButtonAnimators = new List<ButtonAppearAnimator>();
 
     private void Awake()
     {
@@ -80,8 +82,16 @@ public class DialogueManager : MonoBehaviour
     
     private IEnumerator ClearButtonsAtEndOfFrame()
     {
+        foreach (Transform child in choicesContainer)
+        {
+            var button = child.GetComponent<Button>();
+            if (button != null) button.interactable = false;
+        }
+        
         yield return new WaitForEndOfFrame();
     
+        _activeButtonAnimators.Clear();
+        
         foreach (Transform child in choicesContainer)
         {
             Destroy(child.gameObject);
@@ -93,7 +103,8 @@ public class DialogueManager : MonoBehaviour
         GameObject button = Instantiate(choiceButtonPrefab, choicesContainer);
         button.GetComponentInChildren<TMP_Text>().text = choice.choiceText;
         button.GetComponent<Button>().onClick.AddListener(() => SelectChoice(choice));
-        button.AddComponent<ButtonAppearAnimator>();
+        var animator = button.AddComponent<ButtonAppearAnimator>();
+        _activeButtonAnimators.Add(animator);
     }
 
     private void CreateContinueButton()
@@ -101,7 +112,8 @@ public class DialogueManager : MonoBehaviour
         GameObject button = Instantiate(choiceButtonPrefab, choicesContainer);
         button.GetComponentInChildren<TMP_Text>().text = ">>>";
         button.GetComponent<Button>().onClick.AddListener(NextNode);
-        button.AddComponent<ButtonAppearAnimator>();
+        var animator = button.AddComponent<ButtonAppearAnimator>();
+        _activeButtonAnimators.Add(animator);
     }
     
     private void Update()
@@ -109,6 +121,15 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             _typewriter.SkipTyping();
+            _imageAnimator.SkipFade();
+            
+            for (var i = _activeButtonAnimators.Count - 1; i >= 0; i--)
+            {
+                if (_activeButtonAnimators[i] != null)
+                {
+                    _activeButtonAnimators[i].SkipAnimation();
+                }
+            }
         }
     }
 

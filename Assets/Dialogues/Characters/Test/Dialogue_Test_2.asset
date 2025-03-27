@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b358897717402324e9f6e8d72fb87aef, type: 3}
-  m_Name: Dialogue_SomeGuy_Sample_Continue1
+  m_Name: Dialogue_Test_2
   m_EditorClassIdentifier: 
   nodes:
-  - speakerName: Some guy
-    text: You are in a sample dialogue.
-    speakerImage: {fileID: 1790713409811929993, guid: 29402baf22cf1f541b63a157f9fdbd4e, type: 3}
+  - speakerName: test
+    text: a
+    speakerImage: {fileID: 0}
     choices:
-    - choiceText: End dialogue
+    - choiceText: 1
+      nextDialogue: {fileID: 0}
+    - choiceText: 2
+      nextDialogue: {fileID: 0}
+    - choiceText: 3
+      nextDialogue: {fileID: 0}
+    - choiceText: 4
       nextDialogue: {fileID: 0}

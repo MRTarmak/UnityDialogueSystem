@@ -1,35 +1,37 @@
-using System.Collections;
 using UnityEngine;
 
 public class ButtonAppearAnimator : MonoBehaviour
 {
     [SerializeField] private float fadeTime = 0.1f;
     [SerializeField] private float scaleFrom = 0.8f;
-    [SerializeField] private float delay = 0.1f;
     
-    private void Start()
+    private CanvasGroup _canvasGroup;
+    private float _animationProgress;
+
+    private void Awake()
     {
-        StartCoroutine(Animate());
+        _canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        _canvasGroup.alpha = 0f;
+        transform.localScale = Vector3.one * scaleFrom;
     }
 
-    private IEnumerator Animate()
+    private void Update()
     {
-        CanvasGroup canvasGroup = gameObject.AddComponent<CanvasGroup>();
-        canvasGroup.alpha = 0;
-        transform.localScale = Vector3.one * scaleFrom;
+        if (_animationProgress >= 1f) return;
         
-        yield return new WaitForSeconds(delay);
+        _animationProgress += Time.deltaTime / fadeTime;
+        _animationProgress = Mathf.Clamp01(_animationProgress);
         
-        float timer = 0;
-        while (timer < fadeTime)
-        {
-            timer += Time.deltaTime;
-            float progress = timer / fadeTime;
-            canvasGroup.alpha = progress;
-            transform.localScale = Vector3.one * Mathf.Lerp(scaleFrom, 1f, progress);
-            yield return null;
-        }
+        _canvasGroup.alpha = _animationProgress;
+        transform.localScale = Vector3.one * Mathf.Lerp(scaleFrom, 1f, _animationProgress);
+    }
+
+    public void SkipAnimation()
+    {
+        if (_animationProgress >= 1f) return;
         
-        Destroy(canvasGroup);
+        _canvasGroup.alpha = 1f;
+        transform.localScale = Vector3.one;
+        _animationProgress = 1f;
     }
 }
