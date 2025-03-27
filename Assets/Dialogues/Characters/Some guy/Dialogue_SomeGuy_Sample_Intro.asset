@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b358897717402324e9f6e8d72fb87aef, type: 3}
+  m_Name: Dialogue_SomeGuy_Sample_Intro
+  m_EditorClassIdentifier: 
+  nodes:
+  - speakerName: Some guy
+    text: '*Silence*'
+    speakerImage: {fileID: 1790713409811929993, guid: 29402baf22cf1f541b63a157f9fdbd4e, type: 3}
+    choices:
+    - choiceText: Where am I?
+      nextDialogue: {fileID: 11400000, guid: a68e5e79392ad9344b7a60ddc1755b9f, type: 2}
+    - choiceText: Who are you?
+      nextDialogue: {fileID: 11400000, guid: f1226fcdb0b539449bc95dd79f4b5863, type: 2}
