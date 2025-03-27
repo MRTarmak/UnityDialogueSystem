@@ -16,4 +16,6 @@ MonoBehaviour:
   - speakerName: Some guy
     text: Just a sample character.
     speakerImage: {fileID: 1790713409811929993, guid: 29402baf22cf1f541b63a157f9fdbd4e, type: 3}
-    choices: []
+    choices:
+    - choiceText: End dialogue
+      nextDialogue: {fileID: 0}
