@@ -17,7 +17,9 @@ MonoBehaviour:
     text: '*Silence*'
     speakerImage: {fileID: 1790713409811929993, guid: 29402baf22cf1f541b63a157f9fdbd4e, type: 3}
     choices:
-    - choiceText: Where am I?
+    - choiceText: '"Where am I?"'
       nextDialogue: {fileID: 11400000, guid: a68e5e79392ad9344b7a60ddc1755b9f, type: 2}
-    - choiceText: Who are you?
+    - choiceText: '"Who are you?"'
       nextDialogue: {fileID: 11400000, guid: f1226fcdb0b539449bc95dd79f4b5863, type: 2}
+    - choiceText: End dialogue
+      nextDialogue: {fileID: 0}

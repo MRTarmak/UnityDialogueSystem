@@ -7,17 +7,24 @@ public class TypewriterEffect : MonoBehaviour
 {
     [SerializeField] private float charsPerSecond = 30f;
     [SerializeField] private AudioClip typingSound;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] [Range(0, 1)] private float volume = 0.5f;
+    [SerializeField] private float soundPitchRandomization = 0.03f;
     
     private TMP_Text _textField;
     private Coroutine _typingCoroutine;
     private string _currentText;
+    private AudioSource _audioSource;
 
     private void Awake()
     {
         _textField = GetComponent<TMP_Text>();
-        if (audioSource == null && typingSound != null)
-            audioSource = gameObject.AddComponent<AudioSource>();
+        
+        if (typingSound != null)
+        {
+            _audioSource = gameObject.AddComponent<AudioSource>();
+            _audioSource.playOnAwake = false;
+            _audioSource.volume = volume;
+        }
     }
 
     public void StartTyping(string text)
@@ -44,10 +51,20 @@ public class TypewriterEffect : MonoBehaviour
         foreach (char c in _currentText.ToCharArray())
         {
             _textField.text += c;
-            if (typingSound != null && audioSource != null)
-                audioSource.PlayOneShot(typingSound);
+            PlayTypingSound();
             yield return new WaitForSeconds(1f / charsPerSecond);
         }
+        _audioSource.Stop();
         _typingCoroutine = null;
+    }
+    
+    private void PlayTypingSound()
+    {
+        if (typingSound == null || _audioSource == null) return;
+        
+        _audioSource.pitch = 0.05f + Random.Range(-soundPitchRandomization, soundPitchRandomization);
+        
+        _audioSource.Stop();
+        _audioSource.PlayOneShot(typingSound);
     }
 }

@@ -55,12 +55,12 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = node.text;
         
         _typewriter.StartTyping(node.text);
-        _imageAnimator.FadeTo(node.speakerImage);
         
         if (node.speakerImage != null)
         {
             speakerImage.sprite = node.speakerImage;
             speakerImage.gameObject.SetActive(true);
+            _imageAnimator.FadeTo(node.speakerImage);
         }
         else
         {

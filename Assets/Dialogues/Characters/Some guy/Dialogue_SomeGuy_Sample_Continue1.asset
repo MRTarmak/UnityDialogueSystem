@@ -17,5 +17,7 @@ MonoBehaviour:
     text: You are in a sample dialogue.
     speakerImage: {fileID: 1790713409811929993, guid: 29402baf22cf1f541b63a157f9fdbd4e, type: 3}
     choices:
+    - choiceText: <<<
+      nextDialogue: {fileID: 11400000, guid: 2ce6115faf25d1245a4681d33b89e791, type: 2}
     - choiceText: End dialogue
       nextDialogue: {fileID: 0}

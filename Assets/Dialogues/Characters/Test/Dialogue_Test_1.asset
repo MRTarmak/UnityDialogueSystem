@@ -21,3 +21,7 @@ MonoBehaviour:
     text: b
     speakerImage: {fileID: 0}
     choices: []
+  - speakerName: test
+    text: c
+    speakerImage: {fileID: 0}
+    choices: []
