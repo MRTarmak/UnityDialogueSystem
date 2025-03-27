@@ -852,7 +852,7 @@ MonoBehaviour:
   charsPerSecond: 30
   typingSound: {fileID: 8300000, guid: a5619aff85079434fab1f7ed6b43ab91, type: 3}
   volume: 0.5
-  soundPitchRandomization: 0.1
+  soundPitchRandomization: 0.03
 --- !u!1 &1836484986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1056,7 @@ GameObject:
   - component: {fileID: 1888304090}
   - component: {fileID: 1888304091}
   m_Layer: 5
-  m_Name: DialogueSystem
+  m_Name: DialogueManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
